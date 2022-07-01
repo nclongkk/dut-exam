@@ -1,0 +1,23 @@
+<div class="exam-content">
+  <div>
+    <h2>Your result saved in web3 storage</h2>
+  </div>
+  <div>
+    <% cidResults.forEach(cidResult => { %>
+    <div>
+      <a href="https://<%=cidResult.cid%>.ipfs.dweb.link/hello.json">
+        <%=cidResult.cid%></a
+      >
+      <h3>Details</h3>
+      <p>Score: <%=cidResult.data.score%></p>
+      <p>Class: <%=cidResult.data.class%></p>
+      <p>Exam: <%=cidResult.data.examName%></p>
+      <p>Added at <%=cidResult.createdAt%></p>
+      <a href="/students/exams/results/<%=cidResult.data.examResultId%> "
+        >View details your result</a
+      >
+    </div>
+    <hr />
+    <%}) %>
+  </div>
+</div>

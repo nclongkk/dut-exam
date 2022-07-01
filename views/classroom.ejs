@@ -1,0 +1,30 @@
+<div class="exam-content">
+  <div>
+    <h1><%=classroom.name %></h1>
+    <h2>Students</h2>
+    <% classroom.students.forEach(student => { %>
+    <div class="student"><%= student.name %> <%= student.email %></div>
+    <% }) %>
+  </div>
+  <div>
+    <h2>Exams</h2>
+    <% exams.forEach(exam => { %>
+    <div class="exam">
+      <a href="/teachers/exams/<%= exam._id %>"><h4><%= exam.name %></h4></a>
+      <p><%= new Date(exam.startAt).toISOString().split('T')[0]; %></p>
+      start at
+      <p>
+        <%= +new Date(exam.startAt).toISOString().split('T')[1].split(':')[0] +7
+        %>:<%= +new Date(exam.startAt).toISOString().split('T')[1].split(':')[1]
+        %>
+      </p>
+      end at
+      <p>
+        <%= +new Date(exam.endedAt).toISOString().split('T')[1].split(':')[0]+7
+        %>:<%= +new Date(exam.endedAt).toISOString().split('T')[1].split(':')[1]
+        %>
+      </p>
+    </div>
+    <% }) %>
+  </div>
+</div>

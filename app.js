@@ -22,6 +22,7 @@ connectDB();
 // EJS
 app.use(expressLayouts);
 app.set("view engine", "ejs");
+app.use(express.static("public"));
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
@@ -54,6 +55,7 @@ app.use(function (req, res, next) {
 app.use("/", require("./routes/index.js"));
 app.use("/users", require("./routes/users.js"));
 app.use("/teachers", require("./routes/teachers.js"));
+app.use("/students", require("./routes/students.js"));
 
 const PORT = process.env.PORT || 3030;
 

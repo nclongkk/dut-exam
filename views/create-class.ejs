@@ -1,0 +1,49 @@
+<form action="/teachers/classes/create" method="post" autocomplete="off">
+  <div class="form-group">
+    <label for="title">Class name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="className"
+      name="className"
+      placeholder="Enter class name"
+    />
+    <br />
+
+    <button
+      type="submit"
+      class="btn btn-primary float-right"
+      style="position: fixed; bottom: 50px; right: 50px"
+      onclick="onClickAddStudent()"
+    >
+      Create class
+    </button>
+
+    <div class="studentEmails" name="studentEmails[]"></div>
+    <button type="button" class="btn btn-primary" onclick="onClickAddStudent()">
+      Add new student
+    </button>
+
+    <script>
+      const onClickAddStudent = () => {
+        const emails = document.querySelector(".studentEmails");
+        const email = document.createElement("div");
+        email.classList.add("email");
+        email.innerHTML = `
+        <br />
+        <hr />
+                <label for="title">Add new student email </label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="emails[]"
+                    name="emails[]"
+                    placeholder="Enter email"
+                />
+                <br />
+        `;
+        emails.appendChild(email);
+      };
+    </script>
+  </div>
+</form>

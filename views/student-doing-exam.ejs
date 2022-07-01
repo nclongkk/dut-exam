@@ -1,0 +1,55 @@
+<form
+  action="/students/exams/doing/<%= exam._id %> "
+  method="post"
+  autocomplete="off"
+>
+  <div class="form-group">
+    <div>
+      <label for="title">Exam name</label>
+      <h4><%= exam.name %></h4>
+      <br />
+      <label for="title">Class</label>
+      <h4><%= exam.class.name %></h4>
+
+      <p><%= new Date(exam.startAt).toISOString().split('T')[0]; %></p>
+      start at
+      <p>
+        <%= +new Date(exam.startAt).toISOString().split('T')[1].split(':')[0] +7
+        %>:<%= +new Date(exam.startAt).toISOString().split('T')[1].split(':')[1]
+        %>
+      </p>
+      end at
+      <p>
+        <%= +new Date(exam.endedAt).toISOString().split('T')[1].split(':')[0]+7
+        %>:<%= +new Date(exam.endedAt).toISOString().split('T')[1].split(':')[1]
+        %>
+      </p>
+      <hr />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary float-right"
+      style="position: fixed; bottom: 50px; right: 50px"
+    >
+      Submit
+    </button>
+    <div class="answers" name="answers[]"></div>
+    <% exam.questions.forEach((question, index) => { %>
+    <div class="question <%= index+1 %>">
+      <p>Question <%= index+1 %></p>
+      <h3><%= question.question %></h3>
+      <% question.choices.forEach(answer => { %>
+      <div class="answer <%= index+1 %>">
+        <input
+          type="radio"
+          name="answer[<%= index %>]"
+          value="<%= answer._id %>"
+        />
+        <%= answer.content %>
+      </div>
+      <% }) %>
+    </div>
+    <hr />
+    <%}) %>
+  </div>
+</form>

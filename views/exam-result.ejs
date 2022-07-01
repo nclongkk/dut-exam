@@ -1,0 +1,71 @@
+<form
+  action="/students/exams/doing/<%= examResult._id %> "
+  method="post"
+  autocomplete="off"
+>
+  <div class="form-group exam-content">
+    <div>
+      <h2><%= examResult.exam.name %></h2>
+      <h3>Class <%= examResult.exam.class.name %></h3>
+
+      <p>
+        Date: <%= new Date(examResult.exam.startAt).toISOString().split('T')[0];
+        %>
+      </p>
+      start at
+      <p>
+        <%= +new
+        Date(examResult.exam.startAt).toISOString().split('T')[1].split(':')[0]
+        +7 %>:<%= +new
+        Date(examResult.exam.startAt).toISOString().split('T')[1].split(':')[1]
+        %>
+      </p>
+      end at
+      <p>
+        <%= +new
+        Date(examResult.exam.endedAt).toISOString().split('T')[1].split(':')[0]+7
+        %>:<%= +new
+        Date(examResult.exam.endedAt).toISOString().split('T')[1].split(':')[1]
+        %>
+      </p>
+      <hr />
+      <h3>Score: <%= examResult.score%></h3>
+    </div>
+    <div>
+      <div class="answers" name="answers[]"></div>
+      <% examResult.answers.forEach((question, index) => { %>
+      <div class="question <%= index+1 %>">
+        <p>Question <%= index+1 %></p>
+        <% let correctAnswer = ''; %>
+        <h3><%= question.question %></h3>
+        <% question.choices.forEach(answer => { %> <% if (answer._id ===
+        question.correctAnswer) {%> <% correctAnswer = answer.content %> <% } %>
+        <% if (answer._id === question.studentChoice){%>
+        <div class="answer <%= index+1 %>">
+          <input
+            type="radio"
+            value="Exclusive"
+            name="answer[<%= index %>]"
+            value="<%= answer._id %>"
+            checked
+          />
+          <%= answer.content %>
+        </div>
+        <% }else{ %>
+        <div class="answer <%= index+1 %>">
+          <input
+            type="radio"
+            value="Exclusive"
+            name="answer[<%= index %>]"
+            value="<%= answer._id %>"
+          />
+          <%= answer.content %>
+        </div>
+        <% }}) %>
+        <h4>Correct answer: <%= correctAnswer %></h4>
+      </div>
+      <hr />
+      <%}) %>
+    </div>
+  </div>
+</form>

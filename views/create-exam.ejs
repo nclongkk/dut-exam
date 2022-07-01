@@ -1,0 +1,114 @@
+<form action="/teachers/exams/create" method="post" autocomplete="off">
+  <div class="form-group">
+    <label for="title">Exam name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      placeholder="Enter exam name"
+    />
+    <br />
+    <label for="title">Choose your class</label>
+    <select name="classroomId" id="classroomId" class="form-control">
+      <% classes.forEach(classroom => { %>
+      <option value="<%= classroom.id %>"><%= classroom.name %></option>
+      <% }) %>
+    <br />
+    <br />
+    <label for="title">Exam at</label>
+    <input
+      type="date"
+      class="form-control"
+      id="examAt"
+      name="examAt"
+      placeholder="Exam at"
+    />
+    <br />
+    <label for="title">Time start</label>
+    <input type="time" class="form-control" id="startAt" name="startAt" />
+    <br />
+    <label for="title">Time end</label>
+    <input type="time" class="form-control" id="endedAt" name="endedAt" />
+    <br />
+
+    <button
+      type="submit"
+      class="btn btn-primary float-right"
+      style="position: fixed; bottom: 50px; right: 50px"
+    >
+      Create exam
+    </button>
+    <% let countQuestions =0; %>
+
+    <div class="questions" name="questions[]"></div>
+    <button type="button" class="btn btn-primary" onclick="onClickAddQuestion()">Create new question</button>
+
+    <script>
+      const onClickAddQuestion = () => {
+        const questions = document.querySelector(".questions");
+        const question = document.createElement("div");
+        question.classList.add("question");
+        question.innerHTML = `
+        <br />
+        <hr />
+              <label for="title">Question </label>
+              <input
+                  type="text"
+                  class="form-control"
+                  id="questions"
+                  name="questions[]"
+                  placeholder="Enter question"
+              />
+              <br />
+              <label for="title">Option 1</label>
+              <input
+                  type="text"
+                  class="form-control"
+                  id="option1"
+                  name="option1[]"
+                  placeholder="Enter option 1"
+              />
+              <br />
+              <label for="title">Option 2</label>
+              <input
+                  type="text"
+                  class="form-control"
+                  id="option2"
+                  name="option2[]"
+                  placeholder="Enter option 2"
+              />
+              <br />
+              <label for="title">Option 3</label>
+              <input
+                  type="text"
+                  class="form-control"
+                  id="option3"
+                  name="option3[]"
+                  placeholder="Enter option 3"
+              />
+              <br />
+              <label for="title">Option 4</label>
+              <input
+                  type="text"
+                  class="form-control"
+                  id="option4"
+                  name="option4[]"
+                  placeholder="Enter option 4"
+              />
+              <br />
+              <label for="title">Correct answer</label>
+              <input
+                  type="number"
+                  class="form-control"
+                  id="correctAnswer"
+                  name="correctAnswer[]"
+                  placeholder="Enter correct answer"
+              />
+              <br />
+              `;
+        questions.appendChild(question);
+      };
+    </script>
+  </div>
+</form>
